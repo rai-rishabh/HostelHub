@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@1,400;1,500;1,700&display=swap');
+
+.contact-head{
+    background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik', sans-serif;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.contact-form-container{
+  height: 70vh;
+  background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.contact-form-subcontainer{
+  height: 60vh;
+  width: 90%;
+  /* background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2)); */
+  display: flex;
+  gap: 10px;
+}
+
+.contact-form{
+  height: 60vh;
+  width: 100%;
+  /* background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.contact-form-leftsection{
+  height: 60vh;
+  flex:1.5;
+  background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.contact-form-rightsection{
+  flex: 2;
+  height: 60vh;
+  background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-field {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+.input-field::placeholder {
+  color: #000000;
+  transition: color 0.3s;
+}
+
+.input-field:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.input-field:focus::placeholder {
+  color: #007BFF;
+}
+
+.message-field {
+  width: 90%;
+  height: 40vh;
+  padding: 10px;
+  margin: 10px 0;
+  border: none; /* Remove the border */
+  border-radius: 5px;
+  background: transparent;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.message-field::placeholder {
+  color: #000000;
+  transition: color 0.3s;
+}
+
+.message-field:focus {
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.message-field:focus::placeholder {
+  color: #007BFF;
+}
+
+.contact-img{
+  height: 10em;
+  width: 10em;
+}
+
+
+.submit-btn .input-data input{
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 17px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}

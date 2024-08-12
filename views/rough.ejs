@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HH</title>
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/textStyles.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/studentDashboard.css">
+    <link rel="stylesheet" href="/css/staffDashboard.css">
+    <link rel="stylesheet" href="/css/noticeBoard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+    
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
+
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Quicksand:wght@300..700&display=swap');
+        .dashboard-main{
+                height: 80vh;
+                overflow: hidden;
+                display: flex;
+        }
+        .side-menu-container{
+            height: auto;
+            flex: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .dashboard-right-container{
+            flex: 3;
+            max-width: 60vw;
+            overflow: scroll;
+        }
+        .student-profile-card {
+            width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-name {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-family: "Instrument Serif", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .student-info-table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .student-info-table td,
+        .student-info-table th {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .student-info-table th {
+            background-color: #f2f2f2;
+            font-weight: bold; /* Bold labels */
+        }
+
+        .student-info-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .student-info-table tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        .leave-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: auto;
+            width: 30vw;
+    
+        }
+        .leave_subcontainer{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* LEAVE SECTION */
+        .leave-info {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .leave-info p {
+            margin: 8px 0;
+        }
+
+        .leave-info label {
+            font-weight: bold;
+        }
+
+    </style>
+
+
+
+</head>
+
+<body>
+
+    <!-- ======================================== 
+                         Header
+    ========================================  -->
+    <%- include('./header') %>
+
+    <!-- ======================================== 
+                         main
+    ========================================  -->
+    <main class="dashboard-main" style="padding: 10px;">
+
+        <section class="side-menu-container">
+            <section class="student-profile-card">
+                
+            </section>
+        </section>
+  
+        <section class="dashboard-right-container">
+
+            <div class="attendance">
+                <h1 style="text-align: center; color: #333; margin-top: 20px; padding: 10px;">Hostel Attendance</h1>
+            
+                <form method="post" action="/updateAttendance">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Enrollment Number</th>
+                        <th>Name</th>
+                        <th><%= today %></th>
+                        <th><%= yesterday %></th>
+                        <th><%= dayBeforeYesterday %></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% records.forEach(record => { %>
+                        <tr>
+                        <td><%= record.room %></td>
+                        <td><%= record.enrollment %></td>
+                        <td><%= record.name %></td>
+                        <td>
+                            <label>
+                            <input type="checkbox" name="attendance_<%= record.enrollmentNumber %>" value="present">
+                            Present
+                            </label>
+                        </td>
+                        <td><%= record.yesterday || 'N/A' %></td>
+                        <td><%= record.dayBeforeYesterday || 'N/A' %></td>
+                        </tr>
+                    <% }); %>
+                    </tbody>
+                </table>
+            
+                <div class="send-button">
+                    <button type="submit">Send Attendance</button>
+                </div>
+                </form>
+            </div>
+          
+          </section>
+          
+
+    </main>
+
+     <!-- ======================================== 
+                         Footer
+    ========================================  -->
+    <%- include('./footer') %>
+
+  <script src="/js/navbar.js"></script>   
+  <script src="/js/noticeBoard.js"></script>
+  <script src="/js/adminDashboard.js"></script>
+  <script src="/js/studentDashboard.js"></script>    
+  
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
+  <script>
+        const glide = new Glide('.glide', {
+          type: 'carousel',
+          perView: 2,
+          focusAt: 'center',
+          breakpoints: {
+            1920: { perView: 2 },
+            1028: { perView: 2 },
+            480: { perView: 1 },
+          },
+        });
+      
+        glide.mount();
+  
+  </script>
+
+
+</body>
+</html>

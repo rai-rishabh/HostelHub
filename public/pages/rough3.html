@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        /* Internal CSS for styling */
+        .student-profile-card {
+            width: 400px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-name {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .student-info-table {
+            width: 100%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .student-info-table td,
+        .student-info-table th {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .student-info-table th {
+            background-color: #f2f2f2;
+            font-weight: bold; /* Bold labels */
+        }
+
+        .student-info-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <section class="student-profile-card">
+        <h2 class="student-name"><%= studentDetails.name %></h2>
+        <table class="student-info-table">
+            <tr>
+                <th>Enrollment</th>
+                <td><%= studentDetails.enrollment %></td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td><%= studentDetails.phone %></td>
+            </tr>
+            <tr>
+                <th>Parent's Phone</th>
+                <td><%= studentDetails.parentphone %></td>
+            </tr>
+            <tr>
+                <th>Room</th>
+                <td><%= studentDetails.room %></td>
+            </tr>
+            <tr>
+                <th>Bed</th>
+                <td><%= studentDetails.bed %></td>
+            </tr>
+            <tr>
+              <th>Complete Address</th>
+              <td><%= studentDetails.address %></td>
+            </tr>
+            <tr>
+              <th>Total Leave Applications</th>
+              <td><%= studentDetails.address %></td>
+            </tr>
+            <tr>
+              <th>Total Maintenance Requests</th>
+              <td><%= studentDetails.address %></td>
+            </tr>
+            <!-- Add other student information here -->
+        </table>
+    </section>
+</body>
+</html>

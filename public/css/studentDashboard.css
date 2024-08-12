@@ -1,0 +1,108 @@
+/* Base styles */
+.leave-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1vh;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 40vw;
+  height: auto;
+  margin: 20px auto;
+}
+
+/* Title style */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.leave_subcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the leave info section */
+.leave-info {
+  width: 100%;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.leave-info p {
+  margin: 8px 0;
+}
+
+.leave-info label {
+  font-weight: bold;
+}
+
+/* Style the leave image section */
+.leave-image {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.leave-application-screenshot {
+  height: 40vh;
+  max-width: 80%;
+  /* max-height: 300px; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Style the download button */
+.download-button button {
+  padding: 10px 20px;
+  background-color: #337ab7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button button:hover {
+  background-color: #286090;
+}
+
+.glide__slides {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+  .leave-container {
+    width: 95%; /* Adjusted width for medium-sized screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .leave-container {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .leave-info {
+    padding: 15px; /* Adjusted padding for leave info */
+  }
+
+  .leave-application-screenshot {
+    max-height: 200px; /* Limit maximum height of the image */
+  }
+
+  .download-button button {
+    padding: 8px 16px; /* Adjusted padding for buttons */
+  }
+}

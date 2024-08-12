@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HH</title>
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/textStyles.css">
+    <link rel="stylesheet" href="/css/noticeBoard.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
+    <!-- Add this CSS for the larger active slide and smaller inactive slides -->
+    <style>
+    .glide__slide--active {
+      transform: scale(1); /* Larger active slide */
+      transition: transform 0.3s ease; /* Smooth transition */
+    }
+  
+    .glide__slide:not(.glide__slide--active) {
+      transform: scale(0.8); /* Smaller inactive slides */
+      transition: transform 0.3s ease; /* Smooth transition */
+    }
+    
+  </style>
+  
+      
+
+</head>
+
+<body>
+
+    <!-- ======================================== 
+                         Header
+    ========================================  -->
+    <%- include('./header') %>
+
+    <!-- ======================================== 
+                         main
+    ========================================  -->
+    <main class="noticeBoard-main">
+        <section class="notices-container" >
+            <!-- Glide.js Carousel -->
+            <div class="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides" style="display: flex; align-items: center; justify-content: center;">
+                        <!-- Slides -->
+                        <% notices.forEach(function(notice) { %>
+                            <li class="glide__slide" >
+                                <div class="notice" style="height: auto;">
+                                    <h2 class="notice-heading"><%= notice.heading %></h2>
+                                    <p class="notice-body"><%= notice.body %></p>
+                                    <% if (notice.picturePath) { %>
+                                      <a href="<%= trimPublicFromPath(notice.picturePath) %>">
+                                        <img class="notice-image" src="<%= trimPublicFromPath(notice.picturePath) %>" alt="Notice Image">
+                                      </a>
+                                        
+                                  <% } else { %>
+                                      
+                                  <% } %>
+                                  <p class="published-date">Published on: <%= formatDate(notice.created_at) %></p>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+     <!-- ======================================== 
+                         Footer
+    ========================================  -->
+    <%- include('./footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script>
+        const glide = new Glide('.glide', {
+          type: 'carousel',
+          perView: 3,
+          focusAt: 'center',
+          breakpoints: {
+            1920: { perView: 3 },
+            1028: { perView: 2 },
+            480: { perView: 1 },
+          },
+        });
+      
+        glide.mount();
+      
+        glide.on('slideChange', () => {
+          const activeSlide = document.querySelector('.glide__slide--active');
+      
+          // Remove the class from all slides
+          document.querySelectorAll('.glide__slide').forEach((slide) => {
+            slide.classList.remove('glide__slide--active');
+          });
+      
+          // Add the class to the active slide
+          activeSlide.classList.add('glide__slide--active');
+      
+          // Remove the class from all slides except the active slide
+          document.querySelectorAll('.glide__slide:not(.glide__slide--active)').forEach((slide) => {
+            slide.classList.remove('glide__slide--active');
+          });
+        });
+      </script>
+      
+      
+</body>
+</html>

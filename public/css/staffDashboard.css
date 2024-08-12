@@ -1,0 +1,244 @@
+.add-remarks-checkbox {
+    margin-right: 5px;
+  }
+  
+  /* Style for the textarea */
+  .warden-remarks {
+    display: none;
+    margin-top: 5px;
+    padding: 5px;
+    width: 100%;
+    height: 100px;
+    resize: vertical;
+  }
+  
+  /* Style for radio buttons and submit button */
+  input[type='radio'] {
+    margin-right: 5px;
+  }
+  
+  .submit-decision {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Hover effect for submit button */
+  .submit-decision:hover {
+    background-color: #45a049;
+  }
+  
+  /* Style to display radio buttons inline */
+  .radio-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px; /* Adjust the space between radio buttons */
+  }
+  
+  /* Optional: Style for radio buttons */
+  .radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .radio-label input[type="radio"] {
+    margin-right: 5px; 
+  }
+  
+  .dashboard-right-container-studentRecords{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 100%;
+        }
+  
+        .search-menu{
+          width: 100%;
+        }
+        .record-overview{
+          width: 100%;
+          flex: 1;
+        }
+        
+      .search-bar {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      
+  }
+  
+  #searchInput {
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      height: 90%;
+  }
+
+  .student-profile-card {
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-name {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.student-info-table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.student-info-table td,
+.student-info-table th {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.student-info-table th {
+    background-color: #f2f2f2;
+    font-weight: bold; /* Bold labels */
+}
+
+.student-info-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+/* MAINTENANCE REQUESTS SECTION */
+
+.dashboard-right-container-maintenanceRequests{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.notification-container {
+  flex: 1;
+   max-width: 80vw;
+    width: 80vw;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.notification {
+    padding: 20px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px; /* Increased margin */
+    background-color: #f9f9f9;
+    position: relative;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.notification:hover {
+    background-color: #e0e0e0;
+}
+
+.notification p {
+    margin: 10px 0; /* Increased top and bottom margin */
+}
+
+.notification-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.mark-completed-btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 15px 25px; /* Increased padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.mark-completed-btn:hover {
+    background-color: #45a049;
+}
+
+/* Add Glide.js styles */
+.glide__slides {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.glide__slide {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+
+/* MARK ATTENDANCE */
+.attendance {
+  width: 70vw;
+  max-height: 100vh;
+  margin: 20px auto;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  scroll-behavior: smooth;
+  overflow: scroll;
+}
+
+.attendance table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+}
+
+.attendance th, .attendance td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.attendance th {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.attendance input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.send-button {
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.send-button button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Attendance</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .attendance {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .attendance table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .attendance th, .attendance td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .attendance th {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .attendance input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .send-button {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .send-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="attendance">
+        <h1>Hostel Attendance</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Enrollment Number</th>
+                    <th>Name</th>
+                    <th>Mark Today's Attendance</th>
+                    <th>Yesterday</th>
+                    <th>Day Before Yesterday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>101</td>
+                    <td>EN123456</td>
+                    <td>John Doe</td>
+                    <td>
+                        <label><input type="checkbox" name="attendance_1" value="present"> Present</label>
+                    </td>
+                    <td>Absent</td>
+                    <td>Present</td>
+                </tr>
+                <tr>
+                    <td>102</td>
+                    <td>EN654321</td>
+                    <td>Jane Doe</td>
+                    <td>
+                        <label><input type="checkbox" name="attendance_2" value="present"> Present</label>
+                    </td>
+                    <td>Present</td>
+                    <td>Present</td>
+                </tr>
+                <!-- Add more dummy entries as needed -->
+                <tr>
+                    <td>103</td>
+                    <td>EN789012</td>
+                    <td>Bob Smith</td>
+                    <td>
+                        <label><input type="checkbox" name="attendance_3" value="present"> Present</label>
+                    </td>
+                    <td>Present</td>
+                    <td>Absent</td>
+                </tr>
+                <tr>
+                    <td>104</td>
+                    <td>EN567890</td>
+                    <td>Alice Johnson</td>
+                    <td>
+                        <label><input type="checkbox" name="attendance_4" value="present"> Present</label>
+                    </td>
+                    <td>Absent</td>
+                    <td>Present</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="send-button">
+            <button onclick="sendAttendance()">Send Attendance</button>
+        </div>
+    </div>
+
+    <script>
+        function sendAttendance() {
+            // You can implement the logic to send attendance data to the backend here
+            alert("Attendance data sent to the backend!");
+        }
+    </script>
+</body>
+</html>

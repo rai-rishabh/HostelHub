@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HH</title>
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/textStyles.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+    <!-- ======================================== 
+                         Header
+    ========================================  -->
+    <%- include('./header') %>
+
+    <!-- ======================================== 
+                         main
+    ========================================  -->
+    <main class="dashboard-main">
+      <section class="side-menu-container">
+          <section class="side-menu-username">
+              <p class="side-menu-username-toptext">Welcome,</p>
+              <div class="separator"></div>
+              <p class="side-menu-username-bottomtext"><%= username %></p>
+          </section>
+
+          <ul class="side-menu-ul">
+              <li>
+                  <a href="/admin/home">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="/admin/showPublishNotice">
+                      <i class="fa fa-file"></i>
+                    <span class="nav-text">Write Notice</span>
+                  </a>
+                </li>
+
+              <li>
+                  <a href="/admin/showAddStudent">
+                    <i class="fa fa-user-plus"></i>
+                    <span class="nav-text">Add Student</span>
+                  </a>
+                </li>
+        
+                <li>
+                  <a href="/admin/showUpdateStudent">
+                      <i class="fa fa-angle-double-up"></i>
+                    <span class="nav-text">Update Student Details</span>
+                  </a>
+                </li>
+        
+                <li>
+                  <a href="/admin/showRegisterStaff">
+                      <i class="fa fa-users"></i>
+                    <span class="nav-text">Register Staff</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/admin/showRemoveStaff">
+                      <i class="fa fa-user-times"></i>
+                    <span class="nav-text">Remove Staff</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/admin/showRegisterWarden">
+                      <i class="fa fa-users"></i>
+                    <span class="nav-text">Register Warden</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/admin/showRemoveWarden">
+                      <i class="fa fa-user-times"></i>
+                    <span class="nav-text">Remove Warden</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/admin/showAddAdmin">
+                      <i class="fa fa-user-secret"></i>
+                    <span class="nav-text">Add Admin</span>
+                  </a>
+                </li>
+          </ul>
+          <ul class="side-menu-ul-logout">
+              <li class="side-menu-logout-li">
+                <a href="/admin/showChangePassword">
+                  <i class="fa fa-cogs nav-icon"></i>
+                  <span class="nav-text">Change Password</span>
+                </a>
+              </li>
+      
+              <li class="side-menu-logout-li">
+                <a href="/admin/logout">
+                  <i class="fa fa-right-from-bracket nav-icon"></i>
+                  <span class="nav-text">
+                    Logout
+                  </span>
+                </a>
+              </li>  
+            </ul>
+      </section>
+
+      <section class="dashboard-right-container">
+
+          <!-- REGISTER STAFF MEMBER -->
+          <% if (typeof showRegisterStaff !== 'undefined' && showRegisterStaff !== null && showRegisterStaff) { %>
+            <section class="dashboard-right-container-registerstaff">
+              <div class="login-box">
+                  <h2 class="register">REGISTER STAFF MEMBER</h2>
+                  <form action="/admin/registerStaff" method="post" id="register-staff-form">
+                      <div class="user-box">
+                          <input type="text" id="name" name="name" required>
+                          <label>Full Name</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="text" required id="username" name="username">
+                          <label>Username</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="tel" id="phone" name="phone" required>
+                          <label>Phone Number</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Register
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- REMOVE STAFF MEMBER -->
+          else if (typeof showRemoveStaff !== 'undefined' && showRemoveStaff !== null && showRemoveStaff) { %>
+            <section class="dashboard-right-container-removeStaff">
+              <div class="login-box">
+                  <h2 class="register">REMOVE STAFF MEMBER</h2>
+                  <form action="/admin/removeStaff" method="post" id="remove-staff-form">
+                      <div class="user-box">
+                          <input type="text" required id="username" name="username">
+                          <label>Username</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Remove
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- REGISTER WARDEN -->
+          else if (typeof showRegisterWarden !== 'undefined' && showRegisterWarden !== null && showRegisterWarden) { %>
+            <section class="dashboard-right-container-registerwarden">
+              <div class="login-box">
+                  <h2 class="register">REGISTER WARDEN</h2>
+                  <form action="/admin/registerWarden" method="post" id="register-warden-form">
+                      <div class="user-box">
+                          <input type="text" id="name" name="name" required>
+                          <label>Full Name</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="text" required id="username" name="username">
+                          <label>Username</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="tel" id="phone" name="phone" required>
+                          <label>Phone Number</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Register
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- REMOVE WARDEN -->
+          else if (typeof showRemoveWarden !== 'undefined' && showRemoveWarden !== null && showRemoveWarden) { %>
+            <section class="dashboard-right-container-removeWarden">
+              <div class="login-box">
+                  <h2 class="register">REMOVE WARDEN</h2>
+                  <form action="/admin/removeWarden" method="post" id="remove-warden-form">
+                      <div class="user-box">
+                          <input type="text" required id="username" name="username">
+                          <label>Username</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Remove
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- ADD ADMIN -->
+          else if (typeof showAddAdmin !== 'undefined' && showAddAdmin !== null && showAddAdmin) { %>
+            <section class="dashboard-right-container-addAdmin">
+              <div class="login-box">
+                  <h2 class="register">ADD ADMIN</h2>
+                  <form action="/admin/addAdmin" method="post" id="add-admin-form">
+                      <div class="user-box">
+                          <input type="text" required id="username" name="username">
+                          <label>Username</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="password" name="password">
+                          <label>Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="confirmPassword" name="confirmPassword">
+                          <label>Confirm Password</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Add
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- CHANGE PASSWORD -->
+          else if (typeof showChangePassword !== 'undefined' && showChangePassword !== null && showChangePassword) { %>
+            <section class="dashboard-right-container-changeAdminPassword">
+              <div class="login-box">
+                  <h2 class="register">CHANGE PASSWORD</h2>
+                  <form action="/admin/changePassword" method="post" id="change-password-form">
+                    
+                      <div class="user-box">
+                          <input type="password" required id="currentPassword" name="currentPassword">
+                          <label>Current Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="newPassword" name="newPassword">
+                          <label>New Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="confirmNewPassword" name="confirmNewPassword">
+                          <label>Confirm New Password</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Change
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- ADD STUDENT -->
+          else if (typeof showAddStudent !== 'undefined' && showAddStudent !== null && showAddStudent) { %>
+            <section class="dashboard-right-container-addStudent">
+              <section class="add-students-container">
+                <header class="register">Add Student</header>
+                <form action="/admin/addStudent" method="post" class="add-students-form" id="add-student-form">
+                    <div class="input-box">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Enter full name" id="name" name="name" required />
+                    </div>
+        
+                    <div class="input-box">
+                        <label>Enrollment Number</label>
+                        <input type="text" placeholder="Enter Enrollment number" id="enrollment" name="enrollment" required />
+                    </div>
+        
+                    <div class="column">
+                        <div class="input-box">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="Enter phone number" id="phone" name="phone" required />
+                        </div>
+        
+                        <div class="input-box">
+                            <label>Parent Phone Number</label>
+                            <input type="tel" placeholder="Enter parent phone number" id="parentphone" name="parentphone" required />
+                        </div>
+                    </div>
+        
+                    <div class="column">
+                        <div class="input-box">
+                            <label>Room Number</label>
+                            <input type="number" placeholder="Enter room number" id="room" name="room" required />
+                        </div>
+        
+                        <div class="input-box">
+                            <label>Bed Number</label>
+                            <input type="number" placeholder="Enter bed number" id="bed" name="bed" required />
+                        </div>
+                    </div>
+        
+                    <div class="input-box address">
+                        <label>Address</label>
+                        <input type="text" placeholder="Enter address" id="address" name="address" required />
+        
+                        <div class="column">
+                            <input type="text" placeholder="Enter zipcode code" id="zipcode" name="zipcode" required />
+                            <input type="text" placeholder="Enter your city" id="city" name="city" readonly />
+                            <input type="text" placeholder="Enter your state" id="state" name="state" readonly />
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <a>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            Add
+                        </a>
+                    </button>
+                </form>
+            </section>
+            </section>
+          <% }
+
+          <!-- UPDATE STUDENT -->
+          else if (typeof showUpdateStudent !== 'undefined' && showUpdateStudent !== null && showUpdateStudent) { %>
+            <section class="dashboard-right-container-updateStudent">
+              <% if (typeof studentDetails !== 'undefined' && studentDetails !== null && studentDetails) { %>
+                <section class="add-students-container">
+                  <header class="register">Update student Details</header>
+                    <form action="/admin/updateStudentDetails"  method="POST" class="add-students-form" id="update-student-form">
+                        <div class="input-box">
+                          <label>Enrollment Number</label>
+                          <input type="text" placeholder="Enter Enrollment number" id="enrollment" name="enrollment" 
+                            value="<%= studentDetails.enrollment %>" required readonly/>
+                        </div>
+                        <div class="input-box">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter full name" id="name" name="name"
+                              value="<%= studentDetails.name %>" required />
+                        </div>
+                        <div class="column">
+                            <div class="input-box">
+                                <label>Phone Number</label>
+                                <input type="tel" placeholder="Enter phone number" id="phone" name="phone" 
+                                  value="<%= studentDetails.phone %>"required />
+                            </div>
+            
+                            <div class="input-box">
+                                <label>Parent Phone Number</label>
+                                <input type="tel" placeholder="Enter parent phone number" id="parentphone" name="parentphone" 
+                                  value="<%= studentDetails.parentphone %>" required />
+                            </div>
+                        </div>
+            
+                        <div class="column">
+                            <div class="input-box">
+                                <label>Room Number</label>
+                                <input type="number" placeholder="Enter room number" id="room" name="room" 
+                                  value="<%= studentDetails.room %>" required />
+                            </div>
+            
+                            <div class="input-box">
+                                <label>Bed Number</label>
+                                <input type="number" placeholder="Enter bed number" id="bed" name="bed" 
+                                value="<%= studentDetails.bed %>" required />
+                            </div>
+                        </div>
+            
+                        <div class="input-box address">
+                            <label>Address</label>
+                            <input type="text" placeholder="Enter address" id="address" name="address" 
+                            value="<%= studentDetails.address %>"required />
+            
+                            <div class="column">
+                                <input type="text" placeholder="Enter zipcode code" id="zipcode" name="zipcode" 
+                                  value="<%= studentDetails.zipcode %>" required />
+                                <input type="text" placeholder="Enter your city" id="city" name="city"
+                                  value="<%= studentDetails.city %>" readonly />
+                                <input type="text" placeholder="Enter your state" id="state" name="state"
+                                  value="<%= studentDetails.state %>" readonly />
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <a>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                Update
+                            </a>
+                        </button>
+                      </form>
+                </section>
+                
+              <% } else { %>
+                <section class="add-students-container">
+                  <form action="/admin/showStudentDetails" method="POST" class="add-students-form" id="search-student-form">
+                    <div class="input-box">
+                      <label>Enrollment Number</label>
+                      <input type="text" placeholder="Enter Enrollment number" id="enrollment" name="enrollment" required />
+                    </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Search
+                          </a>
+                      </button>
+                    </form>
+                </section>
+              <% } %>
+              
+            </section>
+          <% }
+
+          <!-- NOTICES -->
+          else if (typeof showPublishNotice !== 'undefined' && showPublishNotice !== null && showPublishNotice) { %>
+            <section class="dashboard-right-container-publishNotice">
+              <div class="login-box">
+            <h2>Write A Notice!</h2>
+            <form action="/admin/publishNotice" method="post" id="loginForm" enctype="multipart/form-data">
+              <div class="user-box">
+                <input type="text" name="heading" required>
+                <label>Notice Heading</label>
+              </div>
+              <div class="user-box">
+                <textarea name="body" rows="4" required></textarea>
+                <label>Notice Body</label>
+              </div>
+              <br><br>
+              <div class="user-box">
+                <input type="file" name="image" class="PN-btn" accept="image/*" />
+                <label>Upload Image</label>
+              </div>
+              <button type="submit" class="submit-btn">
+                <a>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Publish Notice
+              </a>
+              </button>
+            </form>
+              </div>
+            </section>
+            
+          <% }
+
+          <!-- ADMIN HOME -->
+          else { %>
+            <section class="dashboard-right-container-welcome">
+                <section class="container">
+                    <div class="char1" style="animation-delay: .1s;">W</div>
+                    <div class="char2" style="animation-delay: .2s;">E</div>
+                    <div class="char3" style="animation-delay: .3s;">L</div>
+                    <div class="char4" style="animation-delay: .4s;">C</div>
+                    <div class="char5" style="animation-delay: .5s;">O</div>
+                    <div class="char6" style="animation-delay: .6s;">M</div>
+                    <div class="char7" style="animation-delay: .7s;">E</div>
+                    <div class="char8" style="animation-delay: .8s;">!</div>
+                  </section>
+                  <section class="infoCont">
+                    <div id="username">
+                      <div class="username" style="animation-delay: 1.5s;"><%= username %></div>
+                    </div>
+                  </section>
+            </section>
+          <% } %>
+          
+
+
+    </section>
+
+  </main>
+
+     <!-- ======================================== 
+                         Footer
+    ========================================  -->
+    <%- include('./footer') %>
+
+  <script src="/js/navbar.js"></script>   
+  <script src="/js/noticeBoard.js"></script>
+  <script src="/js/adminDashboard.js"></script>     
+</body>
+</html>

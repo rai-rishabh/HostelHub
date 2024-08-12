@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=Red+Hat+Display:900&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand');
+
+.welcome-text {
+    margin: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 900;
+    background: url(../assets/grd4.jpg);
+    background-size: 40%;
+    background-position: 50% 50%;
+    -webkit-background-clip: text;
+    color: rgba(0,0,0,0.08);
+    animation: zoomout 10s ease 500ms forwards;
+    animation-iteration-count: infinite;
+  }
+  @keyframes zoomout {
+    from {
+      background-size: 40%;
+    }
+    to {
+      background-size: 20%;
+    }
+  }
+  .welcome-text3 {
+    margin: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 900;
+    background: url(../assets/grd5.jpg);
+    background-size: 40%;
+    background-position: 50% 50%;
+    -webkit-background-clip: text;
+    color: rgba(0,0,0,0.08);
+    animation: zoomout 10s ease 500ms forwards;
+    animation-iteration-count: infinite;
+  }
+  .welcome-text2 {
+    margin: 0;
+    font-family: 'Red Hat Display', sans-serif;
+    font-weight: 900;
+    background: url(../assets/grd3.jpg);
+    background-size: 40%;
+    background-position: 50% 50%;
+    -webkit-background-clip: text;
+    color: rgba(0,0,0,0.08);
+    animation: zoomout2 10s ease 500ms forwards;
+    animation-iteration-count: infinite;
+  }
+  @keyframes zoomout2 {
+    from {
+      background-size: 40%;
+    }
+    to {
+      background-size: 20%;
+    }
+  }
+
+  /* Gradient Text */
+  .GradientText2{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+      font-size: 8vw;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* FLOWING TEXT */
+.flowing-text {
+  position: relative;
+  left: 10px;
+  top: 10px;
+  font-family: 'Gochi Hand', cursive;
+  line-height: 1.5;
+  display: inline;
+  background-image: linear-gradient(
+        transparent 50%,
+        rgba(0,0,0,.3) 50%,
+        rgba(0,0,0,.5) 85%,
+        transparent 85%,
+        transparent 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    animation: animatedBackground 2s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes animatedBackground {
+    to {
+        background-size: 100% 100%;
+    }
+}
+
+/* 980px  */
+@media (max-width: 62em) {
+  .card-subtext{
+      font-size: 30px;
+      line-height: 1.0;
+  }
+
+}
+
+/* TOP BOTTOM STYLE */
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
+
+@keyframes showTopText {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  40%, 60% {
+    transform: translate3d(0, 50%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes showBottomText {
+  0% {
+    transform: translate3d(0, -100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animated-title {
+  color: #222;
+  font-family: Roboto, Arial, sans-serif;
+  height: 90vmin;
+  width: 90vmin;
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+}
+
+/* .animated-title > div {
+  height: 50%;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+} */
+
+.animated-title > div div {
+  font-size: 12vmin;
+  padding: 2vmin 0;
+}
+
+.animated-title > div div span {
+  display: block;
+}
+
+.animated-title > div.text-top {
+  border-bottom: 1vmin solid #000;
+  top: 0;
+}
+
+.animated-title > div.text-top div {
+  animation: showTopText 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  bottom: 0;
+  transform: translate(0, 100%);
+}
+
+.animated-title > div.text-top div span:first-child {
+  color: #767676;
+}
+
+.animated-title > div.text-bottom {
+  bottom: 0;
+}
+
+.animated-title > div.text-bottom div {
+  animation: showBottomText 0.5s;
+  animation-delay: 1.75s;
+  animation-fill-mode: forwards;
+  top: 0;
+  transform: translate(0, -100%);
+}
+
+

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HH</title>
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/textStyles.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+    <link rel="stylesheet" href="/css/about.css">
+    <link rel="stylesheet" href="/css/contact.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/studentDashboard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
+</head>
+
+<body>
+
+    <!-- ======================================== 
+                         Header
+    ========================================  -->
+    <%- include('./header') %>
+
+    <!-- ======================================== 
+                         main
+    ========================================  -->
+    <main class="dashboard-main">
+      <section class="side-menu-container">
+          <section class="side-menu-username">
+              <p class="side-menu-username-toptext">Welcome,</p>
+              <div class="separator"></div>
+              <p class="side-menu-username-bottomtext"><%= username %></p>
+          </section>
+
+          <ul class="side-menu-ul">
+              <li>
+                  <a href="/student/home">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="/student/showLeaveStatus">
+                    <i class="fa fa-envelope"></i>
+                    <span class="nav-text">Leave Status</span>
+                  </a>
+                </li>
+
+              <li>
+                  <a href="/student/showMaintenanceApplication">
+                    <i class="fa fa-pencil"></i>
+                    <span class="nav-text">Request Maintenance</span>
+                  </a>
+                </li>
+        
+                <li>
+                  <a href="/student/showLeaveApplication">
+                    <i class="fa fa-pencil"></i>
+                    <span class="nav-text">Apply for leave</span>
+                  </a>
+                </li>
+        
+          </ul>
+          <ul class="side-menu-ul-logout">
+              <li class="side-menu-logout-li">
+                <a href="/student/showChangePassword">
+                  <i class="fa fa-cogs nav-icon"></i>
+                  <span class="nav-text">Change Password</span>
+                </a>
+              </li>
+      
+              <li class="side-menu-logout-li">
+                <a href="/student/logout">
+                  <i class="fa fa-right-from-bracket nav-icon"></i>
+                  <span class="nav-text">
+                    Logout
+                  </span>
+                </a>
+              </li>  
+            </ul>
+      </section>
+
+      <section class="dashboard-right-container">
+
+          <!-- LEAVE STATUS-->
+          <% if (typeof showLeaveStatus !== 'undefined' && showLeaveStatus !== null && showLeaveStatus) { %>
+            <div class="glide" style="width: 80vw; height: 70vh;">
+              <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <!-- Slides -->
+                    <% leaveApplications.forEach(function(application) { %>
+
+                      <% if (application.status === 'approved') { %>
+                        <li class="glide__slide">
+                          <div class="leave-container">
+                            <div class="title">Leave Application</div>
+                              <p>Applied On: <%= formatDate(application.AppliedOn) %></p>
+                            <section class="leave_subcontainer">
+                        
+                                <div class="leave-info">
+                                    <p><label>Enrollment:</label> <%= application.username %></p>
+                                    <p><label>Name:</label><%= application.name %></p>
+                                    <p><label>Room Number:</label> <%= application.room_no %></p>
+                                    <p><label>From Date:</label> <%= formatDate(application.from_date) %></p>
+                                    <p><label>To Date:</label> <%= formatDate(application.to_date) %></p>
+                                    <p><label>Number of Days:</label> <%= application.no_of_days %></p>
+                                    <p><label>Address on Leave:</label> <%= application.address %>, <%= application.city %>, <%= application.state %>, <%= application.zipcode %></p>
+                                    <p><label>Reason for Leave:</label> <%= application.reason %></p>
+                                    <p style="color:green; text-transform: uppercase;"><label>Status:</label> <%= application.status %></p>
+                                    <p><label>Remarks:</label> <%= application.remarks %></p>
+                                  </div>
+                                  
+                                  <div class="leave-image">
+                                    <img src="/<%= trimPublicFromPath(application.image)%>" class="leave-application-screenshot" alt="Leave Application Screenshot" />
+                                  </div>
+                        
+                            </section>
+                            
+                            <div class="download-button">
+                              <button><a href="/student/downloadLeaveApplication?id=<%= application.id %>"  style="text-decoration: none;">Download Application</a></button>
+                            </div>
+                          </div>
+                        </li>
+                      
+                      <% } else if (application.status === 'rejected') { %>
+                        <li class="glide__slide">
+                          <div class="leave-container">
+                            <div class="leave-pending">
+                              <p style="color: red;">We regret to inform you that your leave application(APPLIED ON: <%= formatDate(application.AppliedOn) %>) has been rejected.<br>
+                              </p>
+                              <p style="color: black;">Due To: <%= application.remarks %>
+                              </p>
+                          </div>
+                        </li>
+
+                      <% } else { %>
+                        <li class="glide__slide">
+                          <div class="leave-container">
+                            <div class="leave-pending">
+                              <p>Your leave application(APPLIED ON: <%= formatDate(application.AppliedOn) %>) is currently under review.<BR> We will notify you of the status soon.</p>
+                          </div>
+                        </li>
+
+                        
+                      <% } %>
+                        
+                        <% }); %> 
+                    
+                </ul>
+            </div>
+          </div>
+          
+          <% }
+
+          <!-- LEAVE APPLICATION -->
+          else if (typeof showLeaveApplication !== 'undefined' && showLeaveApplication !== null && showLeaveApplication) { %>
+           <section class="dashboard-right-container-addStudent">
+            <section class="add-students-container">
+              <header class="register">Leave Application</header>
+              <form action="/student/applyLeave" method="post" class="add-students-form" id="add-student-form" enctype="multipart/form-data">
+
+                <div class="column">
+                    <div class="input-box">
+                        <label>From</label>
+                        <input type="date" id="from_date" name="from_date" required onchange="calculateDays()" />
+                    </div>
+    
+                    <div class="input-box">
+                        <label>To </label>
+                        <input type="date" id="to_date" name="to_date" required onchange="calculateDays()" />
+                    </div>
+                </div>
+
+                <div class="input-box">
+                  <label>Number of days</label>
+                  <input type="text" id="no_of_days" name="no_of_days" readonly/>
+                 </div>
+
+                <div class="input-box address">
+                    <label>Address On leave</label>
+                    <input type="text" placeholder="Enter address" id="address" name="address" required />
+    
+                    <div class="column">
+                        <input type="text" placeholder="Enter zipcode code" id="zipcode" name="zipcode" required />
+                        <input type="text" placeholder="Enter your city" id="city" name="city" readonly />
+                        <input type="text" placeholder="Enter your state" id="state" name="state" readonly />
+                    </div>
+                </div>
+
+                <div class="input-box">
+                  <label>Reason</label>
+                  <textarea id="reason" name="reason" rows="2" required></textarea>
+                </div>
+
+                
+                <div class="input-box">
+                    <label>Upload Image</label>
+                    <input type="file" name="image" class="PN-btn" accept="image/*" required style="border: none;"/>
+                </div>
+                  
+                  <button type="submit" class="submit-btn">
+                      <a>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                          Apply
+                      </a>
+                  </button>
+              </form>
+          </section>
+         </section> 
+          <% }
+
+          <!-- MAINTENANCE APPLICATION -->
+          else if (typeof showMaintenanceApplication !== 'undefined' && showMaintenanceApplication !== null && showMaintenanceApplication) { %>
+            <section class="dashboard-right-container-Maintenance">
+              <div class="login-box">
+            <h2>Request For Maintenance!</h2>
+            <form action="/student/requestMaintenance" method="post" id="maintenanceForm">
+              <div class="user-box">
+                <textarea id="mreq" name="mreq" rows="4" required></textarea>
+                <label>Maintenance For</label>
+              </div>
+              <br><br>
+              <button type="submit" class="submit-btn">
+                <a>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Send
+              </a>
+              </button>
+            </form>
+              </div>
+            </section>
+          <% }
+
+          
+
+          <!-- CHANGE PASSWORD -->
+          else if (typeof showChangePassword !== 'undefined' && showChangePassword !== null && showChangePassword) { %>
+            <section class="dashboard-right-container-changeAdminPassword">
+              <div class="login-box">
+                  <h2 class="register">CHANGE PASSWORD</h2>
+                  <form action="/student/changePassword" method="post" id="change-password-form">
+                    
+                      <div class="user-box">
+                          <input type="password" required id="currentPassword" name="currentPassword">
+                          <label>Current Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="newPassword" name="newPassword">
+                          <label>New Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="confirmNewPassword" name="confirmNewPassword">
+                          <label>Confirm New Password</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Change
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          
+            
+         
+
+          <!-- STUDENT HOME -->
+          else { %>
+            <section class="dashboard-right-container-welcome">
+                <section class="container">
+                    <div class="char1" style="animation-delay: .1s;">W</div>
+                    <div class="char2" style="animation-delay: .2s;">E</div>
+                    <div class="char3" style="animation-delay: .3s;">L</div>
+                    <div class="char4" style="animation-delay: .4s;">C</div>
+                    <div class="char5" style="animation-delay: .5s;">O</div>
+                    <div class="char6" style="animation-delay: .6s;">M</div>
+                    <div class="char7" style="animation-delay: .7s;">E</div>
+                    <div class="char8" style="animation-delay: .8s;">!</div>
+                  </section>
+                  <section class="infoCont">
+                    <div id="username">
+                      <div class="username" style="animation-delay: 1.5s;"><%= username %></div>
+                    </div>
+                  </section>
+            </section>
+          <% } %>
+          
+
+
+    </section>
+
+  </main>
+
+     <!-- ======================================== 
+                         Footer
+    ========================================  -->
+    <%- include('./footer') %>
+
+  <script src="/js/navbar.js"></script>   
+  <script src="/js/noticeBoard.js"></script>
+  <script src="/js/adminDashboard.js"></script>
+  <script src="/js/studentDashboard.js"></script>    
+  
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script>
+        const glide = new Glide('.glide', {
+          type: 'carousel',
+          perView: 2,
+          focusAt: 'center',
+          breakpoints: {
+            1920: { perView: 2 },
+            1028: { perView: 1 },
+            480: { perView: 1 },
+          },
+        });
+      
+        glide.mount();
+      
+       
+      </script>
+
+
+</body>
+</html>

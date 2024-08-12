@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HH</title>
+
+    <!-- External CSS files -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/textStyles.css">
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/studentDashboard.css">
+    <link rel="stylesheet" href="/css/staffDashboard.css">
+    <link rel="stylesheet" href="/css/noticeBoard.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,300" rel="stylesheet" type="text/css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+
+
+    <style>
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ======================================== 
+                         Header
+    ========================================  -->
+    <%- include('./header') %>
+
+    <!-- ======================================== 
+                         main
+    ========================================  -->
+    <main class="dashboard-main" style="padding: 10px;">
+      <section class="side-menu-container">
+          <section class="side-menu-username">
+              <p class="side-menu-username-toptext">Welcome,</p>
+              <div class="separator"></div>
+              <p class="side-menu-username-bottomtext"><%= username %></p>
+          </section>
+
+          <ul class="side-menu-ul">
+              <li>
+                  <a href="/staff/home">
+                    <i class="fa fa-home nav-icon"></i>
+                    <span class="nav-text">Home</span>
+                  </a>
+              </li>
+
+              <li>
+                  <a href="/staff/showMarkAttendance">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <span class="nav-text">Mark Attendance</span>
+                  </a>
+                </li>
+
+                <!-- <li>
+                  <a href="/staff/showUpdateAttendance">
+                    <i class="fa fa-level-up" aria-hidden="true"></i>
+                    <span class="nav-text">Update Attendance</span>
+                  </a>
+                </li> -->
+
+              <li>
+                  <a href="/staff/showMaintenanceRequests">
+                    <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                    <span class="nav-text">Maintenace Requests</span>
+                  </a>
+                </li>
+        
+                <li>
+                  <a href="/staff/showLeaveApplications">
+                    <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                    <span class="nav-text">Leave Applications</span>
+                  </a>
+                </li>
+
+                <li>
+                  <a href="/staff/showStudentRecords">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                    <span class="nav-text">Student Record</span>
+                  </a>
+                </li>
+        
+          </ul>
+          <ul class="side-menu-ul-logout">
+              <li class="side-menu-logout-li">
+                <a href="/staff/showChangePassword">
+                  <i class="fa fa-cogs nav-icon"></i>
+                  <span class="nav-text">Change Password</span>
+                </a>
+              </li>
+      
+              <li class="side-menu-logout-li">
+                <a href="/staff/logout">
+                  <i class="fa fa-right-from-bracket nav-icon"></i>
+                  <span class="nav-text">
+                    Logout
+                  </span>
+                </a>
+              </li>  
+            </ul>
+      </section>
+
+      <section class="dashboard-right-container">
+
+          <!-- MARK ATTENDANCE-->
+          <% if (typeof showMarkAttendance !== 'undefined' && showMarkAttendance !== null && showMarkAttendance) { %>
+            <section class="dashboard-right-container-markAttendance">
+              <div class="attendance">
+                <h1 style="text-align: center; color: #333; margin-top: 20px; padding: 10px;">Attendance</h1>
+            
+                <form method="post" action="/staff/markAttendance">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Enrollment Number</th>
+                        <th>Name</th>
+                        <th><%= today %></th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% records.forEach(record => { %>
+                        <tr>
+                        <td><%= record.room %></td>
+                        <td><%= record.enrollment %></td>
+                        <td><%= record.name %></td>
+                        <td>
+                            <label>
+                            <input type="checkbox" name="attendance[<%= record.enrollment %>]" value="P">
+                            Present
+                            </label>
+                        </td>
+                        </tr>
+                    <% }); %>
+                    </tbody>
+                </table>
+            
+                <div class="send-button">
+                    <button type="submit">Mark</button>
+                </div>
+                </form>
+            </div>
+            </section>
+          <% }
+
+          <!-- UPDATE ATTENDANCE -->
+          else if (typeof showUpdateAttendance !== 'undefined' && showUpdateAttendance !== null && showUpdateAttendance) { %>
+            <section class="dashboard-right-container-updateAttendance">
+
+            </section>
+          <% }
+
+          <!-- MAINTENANCE REQUESTS -->
+          else if (typeof showMaintenanceRequests !== 'undefined' && showMaintenanceRequests !== null && showMaintenanceRequests) { %>
+            <section class="dashboard-right-container-maintenanceRequests">
+              <div class="notification-container">
+                <div class="glide">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+            
+                            <!-- Maintenance Requests -->
+                            <% maintenance.forEach(function(request) { %>
+                                <li class="glide__slide">
+                                    <form action="/staff/markCompleted" method="post">
+                                        <div class="notification">
+                                            <p class="notification-header">Room #<%= request.room %></p>
+                                            <p><strong>By:</strong> <%= request.enrollment %></p>
+                                            <p><strong>Date:</strong> <%= formatDate(request.requested_on) %></p>
+                                            <p><strong>Details:</strong> <%= request.request_for %></p>
+                                            <button type="submit" class="mark-completed-btn" name="requestId" value="<%= request.id %>">Mark Completed</button>
+                                        </div>
+                                    </form>
+                                </li>
+                            <% }); %>
+            
+                            <!-- Add more glide__slide items for additional maintenance requests -->
+            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            </section>
+          <% }
+
+          <!-- LEAVE APPLICATIONS -->
+          else if (typeof showLeaveApplications !== 'undefined' && showLeaveApplications !== null && showLeaveApplications) { %>
+            <section class="dashboard-right-container-leaveApplications" style="display: flex; justify-content: center;  align-items: center;">
+              <div class="glide" style="width: 80vw; height: auto;">
+                <div class="glide__track" data-glide-el="track">
+                  <ul class="glide__slides">
+                      <!-- Slides -->
+                      <% leaveApplications.forEach(function(application) { %>
+  
+                        
+                          <li class="glide__slide">
+                            <div class="leave-container">
+                              <div class="title">Leave Application</div>
+                                <p>Applied On: <%= formatDate(application.AppliedOn) %></p>
+                              <section class="leave_subcontainer">
+                          
+                                  <div class="leave-info">
+                                      <p><label>Enrollment:</label> <%= application.username %></p>
+                                      <p><label>Name:</label><%= application.name %></p>
+                                      <p><label>Room Number:</label> <%= application.room_no %></p>
+                                      <p><label>From Date:</label> <%= formatDate(application.from_date) %></p>
+                                      <p><label>To Date:</label> <%= formatDate(application.to_date) %></p>
+                                      <p><label>Number of Days:</label> <%= application.no_of_days %></p>
+                                      <p><label>Address on Leave:</label> <%= application.address %>, <%= application.city %>, <%= application.state %>, <%= application.zipcode %></p>
+                                      <p><label>Reason for Leave:</label> <%= application.reason %></p>
+                                      <p style="text-transform:uppercase;"><label>Status:</label> <%= application.status %></p>
+                                      <p style="text-transform: uppercase;"><label>Remarks:</label> <%= application.remarks %></p>
+                                    
+                                    </div>
+                                    
+                                    <div class="leave-image">
+                                      <a href="/<%= trimPublicFromPath(application.image)%>">
+                                        <img src="/<%= trimPublicFromPath(application.image)%>" class="leave-application-screenshot" alt="Leave Application Screenshot" />
+                                      </a>
+                                      </div>
+                          
+                              </section>
+                              
+                              <div class="buttons">
+                                <form id="leaveDecisionForm" action="/staff/applicationDecision" method="POST" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                  <label>
+                                    <input type="hidden" name="applicationId" value="<%= application.id %>" readonly>
+                                  </label>
+                              
+                                  <div class="radio-group">
+                                    <label class="radio-label">
+                                      <input type="radio" name="presenceStatus" value="present">
+                                      <span class="radio-text">Student Physically Present.</span>
+                                    </label>
+                              
+                                    <label class="radio-label">
+                                      <input type="radio" name="presenceStatus" value="absent">
+                                      <span class="radio-text">Student Not Present.</span>
+                                    </label>
+                                  </div>
+                              
+                                  <button type="submit" class="submit-decision">Submit</button>
+                                </form>
+                              </div>
+                              
+                              
+                              
+                            </div>
+                          </li>                       
+                          
+                          <% }); %> 
+                      
+                  </ul>
+              </div>
+            </div>
+            
+            </section>
+            
+          <% }
+           
+          <!-- STUDENT RECORDS -->
+          else if (typeof showStudentRecords !== 'undefined' && showStudentRecords !== null && showStudentRecords) { %>
+            <section class="dashboard-right-container-studentRecords">
+                <div class="login-box">
+                  <form action="/staff/studentRecords" method="post">
+                      <div class="user-box">
+                          <input type="text" required id="studentRecordEnrollment" name="studentRecordEnrollment">
+                          <label>Enter Enrollment</label>
+                      </div>
+                      
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Search
+                          </a>
+                      </button>
+                  </form>
+                </div>
+          </section>       
+          <% }
+
+
+          <!-- CHANGE PASSWORD -->
+          else if (typeof showChangePassword !== 'undefined' && showChangePassword !== null && showChangePassword) { %>
+            <section class="dashboard-right-container-changePassword">
+              <div class="login-box">
+                  <h2 class="register">CHANGE PASSWORD</h2>
+                  <form action="/staff/changePassword" method="post" id="change-password-form">
+                    
+                      <div class="user-box">
+                          <input type="password" required id="currentPassword" name="currentPassword">
+                          <label>Current Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="newPassword" name="newPassword">
+                          <label>New Password</label>
+                      </div>
+                      <div class="user-box">
+                          <input type="password" required id="confirmNewPassword" name="confirmNewPassword">
+                          <label>Confirm New Password</label>
+                      </div>
+                      <button type="submit" class="submit-btn">
+                          <a>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              <span></span>
+                              Change
+                          </a>
+                      </button>
+                  </form>
+              </div>
+            </section>
+          <% }
+
+          <!-- HOME -->
+          else { %>
+            <section class="dashboard-right-container-welcome">
+                <section class="container">
+                    <div class="char1" style="animation-delay: .1s;">W</div>
+                    <div class="char2" style="animation-delay: .2s;">E</div>
+                    <div class="char3" style="animation-delay: .3s;">L</div>
+                    <div class="char4" style="animation-delay: .4s;">C</div>
+                    <div class="char5" style="animation-delay: .5s;">O</div>
+                    <div class="char6" style="animation-delay: .6s;">M</div>
+                    <div class="char7" style="animation-delay: .7s;">E</div>
+                    <div class="char8" style="animation-delay: .8s;">!</div>
+                  </section>
+                  <section class="infoCont">
+                    <div id="username">
+                      <div class="username" style="animation-delay: 1.5s;"><%= username %></div>
+                    </div>
+                  </section>
+            </section>
+          <% } %>
+          
+
+
+    </section>
+
+  </main>
+
+     <!-- ======================================== 
+                         Footer
+    ========================================  -->
+    <%- include('./footer') %>
+
+  <script src="/js/navbar.js"></script>   
+  <script src="/js/noticeBoard.js"></script>
+  <script src="/js/adminDashboard.js"></script>
+  <script src="/js/studentDashboard.js"></script>    
+  
+  <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+    <script>
+        const glide = new Glide('.glide', {
+          type: 'carousel',
+          perView: 2,
+          focusAt: 'center',
+          breakpoints: {
+            1920: { perView: 2 },
+            1028: { perView: 2 },
+            480: { perView: 1 },
+          },
+        });
+      
+        glide.mount();
+
+        
+      </script>
+
+
+</body>
+</html>
